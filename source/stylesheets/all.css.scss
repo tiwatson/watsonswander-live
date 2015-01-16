@@ -1,0 +1,66 @@
+@charset "utf-8";
+
+$body-bg: none !default; //#3498db !default;
+
+$navbar-inverse-bg: #1b926c !default;
+$navbar-inverse-brand-color: #fff !default;
+$navbar-inverse-link-color: #eee !default;
+
+$brand-info: #d35400 !default;
+
+$grid-float-breakpoint: 0;
+
+$main-color: rgba(43, 84, 126, 1); // #2B547E; // steelblue
+
+@import 'bootstrap';
+
+@font-face {
+  font-family: 'StateFaceRegular';
+  src: url(font-path('stateface-regular-webfont.eot'));
+  src: url(font-path('stateface-regular-webfont.eot') + '?#iefix') format('embedded-opentype'),
+  url(font-path('stateface-regular-webfont.woff')) format('woff'),
+  url(font-path('stateface-regular-webfont.ttf')) format('truetype'),
+  url(font-path('stateface-regular-webfont.svg#StateFaceRegular')) format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.container{
+  max-width: none !important;
+  width: 768px; //660px;
+}
+
+// #main-container {
+//   background-color: #ffffff; //#ecf0f1;
+// }
+
+h1, h2, h3, h4, h5, h6 {
+  text-align: center;
+  margin: 0px;
+}
+
+h2.info-title {
+  font-weight: 400;
+  background: rgba(43, 84, 126, 1);
+  color: #ddd;
+  margin: 30px 4px 30px 4px;
+  border-top: 1px dashed #ddd;
+  border-bottom: 1px dashed #ddd;
+  padding: 3px;
+  box-shadow: 0 0 0 4px rgba(43, 84, 126, 1), 2px 1px 6px 3px rgba(10, 10, 0, 0.5);
+  position: relative;
+  height: 42px;
+}
+
+
+h4.with_counts {
+  margin: 0px;
+  text-align: center;
+  .counts {
+    font-size: 68px;
+    display: block;
+  }
+}
+
+
+@import 'infographic/states_bar'
