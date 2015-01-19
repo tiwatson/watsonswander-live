@@ -1,0 +1,34 @@
+
+
+#d3StateMap {
+  position: relative;
+  .replayBox {
+    z-index: 1;
+    position: absolute;
+    bottom: 30px;
+    left: 30px;
+  }
+
+  .stateText {
+    font-size: 12px;
+  }
+}
+
+
+.background {
+  fill: none;
+  pointer-events: all;
+}
+
+.states {
+  fill: #ccc;
+  stroke: #fff;
+  stroke-width: 1px;
+}
+
+.line {
+  stroke: $main-color;
+  stroke-width: 2px;
+  //stroke-dasharray: 4,2;
+  fill: none;
+}

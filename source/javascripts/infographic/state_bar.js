@@ -12,7 +12,7 @@ WI: 'Wisconsin', WY: 'Wyoming'};
 var state_bar = function (data) {
 
   d3.select('.current_length_count').text(data.current_state_stay);
-  d3.select('#current_state_text').text(data.current_state);
+  d3.select('#current_state_text').text( us_states[data.location_current.state_short] );
 
 
   var x = d3.scale.linear()

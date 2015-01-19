@@ -4,6 +4,12 @@ title: Welcome to Middleman
 
 %h1 Live
 
+#d3StateMap
+  %a.replayBox.btn.btn-primary{ href: '#' }
+    .span.glyphicon.glyphicon-play
+    Replay
+
+
 #info-current
   .row
     .col-xs-4
@@ -22,6 +28,24 @@ title: Welcome to Middleman
         States
 
 
+
+#info-category
+  %h2.info-title Where we stay
+
+  .row
+    .col-xs-6
+      #info-category_counts
+    .col-xs-6
+      #category-counts-list
+
+
+%script{ id: 'categorylist', type: 'text/html' }
+  %ul.list-unstyled
+    {{#categories}}
+    %li.category-list-item{ 'data-key' => '{{key}}', 'data-title' => '{{title}}', 'data-percent' => '{{percent}}'}
+      %span.label {{days}}
+      {{title}}
+    {{/categories}}
 
 #info-states
   %h2.info-title Top States
@@ -43,3 +67,23 @@ title: Welcome to Middleman
           %span.current_length_days Days
         %h3#current_state_text
           Loading...
+
+
+
+#info-current
+  .row
+    .col-xs-4
+
+      %h4.with_counts
+        %span#miles_towed.counts X
+        Miles Towed
+
+    .col-xs-4
+      %h4.with_counts
+        Longest drive
+        %span#longest_drive.counts
+
+    .col-xs-4
+      %h4.with_counts
+        Shorest Drive
+        %span#shortest_drive.counts
