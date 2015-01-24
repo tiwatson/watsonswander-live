@@ -111,16 +111,18 @@ svg.append("rect")
 .on("mouseout", mouseout )
 .on("mousemove", mousemove );
 
+var current_tip;
+
 function mouseout() {
   var pos = d3.mouse(this);
   if ((pos[0] < 0) || (pos[0] > width) || (pos[1] < 0) || (pos[1] > height)) {
     console.log('real out');
     tip.hide();
+    current_tip = null;
   }
 
 }
 
-var current_tip;
 function mousemove() {
   var x0 = x.invert(d3.mouse(this)[0]),
   i = bisectDate(mc_data, x0, 1),
