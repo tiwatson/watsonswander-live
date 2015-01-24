@@ -12,6 +12,8 @@ bisectDate = d3.bisector(function(d) { return d.date; }).left,
 formatValue = d3.format(",.0f"),
 formatCurrency = function(d) { return "$" + formatValue(d); };
 
+var tipFormat = d3.time.format("%B %Y");
+
 var x = d3.time.scale()
 .range([0, width]);
 
@@ -69,7 +71,7 @@ svg.append("path")
 .attr("class", "line")
 .attr("d", line);
 
-svg.selectAll(".dot")
+var circle = svg.selectAll(".dot")
 .data(mc_data)
 .enter().append("circle")
 .attr("class", "dot")
@@ -87,7 +89,6 @@ svg.append("path")
 .attr("class", "area")
 .attr("d", area);
 
-
 var focus = svg.append("g")
 .attr("class", "focus")
 .style("display", "none");
@@ -99,22 +100,38 @@ focus.append("text")
 .attr("x", 9)
 .attr("dy", ".35em");
 
+tip = d3.tip().attr('class', 'd3-tip').offset([-10, 0]).html(function(d) { return tipFormat(d.date) + "<br/>" + formatCurrency(d.cost); });
+svg.call(tip);
+
 svg.append("rect")
 .attr("class", "overlay")
 .attr("width", width)
 .attr("height", height)
-.on("mouseover", function() { focus.style("display", null); })
-.on("mouseout", function() { focus.style("display", "none"); })
-.on("mousemove", mousemove);
+// .on("mouseover", mousemove )
+.on("mouseout", mouseout )
+.on("mousemove", mousemove );
 
+function mouseout() {
+  var pos = d3.mouse(this);
+  if ((pos[0] < 0) || (pos[0] > width) || (pos[1] < 0) || (pos[1] > height)) {
+    console.log('real out');
+    tip.hide();
+  }
+
+}
+
+var current_tip;
 function mousemove() {
   var x0 = x.invert(d3.mouse(this)[0]),
   i = bisectDate(mc_data, x0, 1),
   d0 = mc_data[i - 1],
   d1 = mc_data[i],
   d = x0 - d0.date > d1.date - x0 ? d1 : d0;
-  focus.attr("transform", "translate(" + x(d.date) + "," + y(d.cost) + ")");
-  focus.select("text").text(formatCurrency(d.cost));
+  var new_tip = mc_data.indexOf(d);
+  if (current_tip != new_tip) {
+    current_tip = new_tip;
+    tip.show(d, circle[0][current_tip]);
+  }
 }
 
 };

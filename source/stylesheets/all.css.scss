@@ -149,6 +149,11 @@ div.tooltip { position: absolute; width: 60px; height: 28px; padding: 2px; font:
     stroke: $main-color;
   }
 
+  .focus-text {
+    fill: $main-color;
+    background-color: #ff0000;
+  }
+
   .dot {
     fill: $main-color;
     stroke: $main-color;
@@ -158,4 +163,34 @@ div.tooltip { position: absolute; width: 60px; height: 28px; padding: 2px; font:
   .area {
     fill: rgba(43, 84, 126, 0.2);
   }
+}
+
+
+.d3-tip {
+  padding: 6px;
+  background: $main-color;
+  opacity: 0.5;
+  color: #fff;
+  border-radius: 3px;
+  text-align: center;
+}
+
+/* Creates a small triangle extender for the tooltip */
+.d3-tip:after {
+  box-sizing: border-box;
+  display: inline;
+  font-size: 10px;
+  width: 100%;
+  line-height: 1;
+  color: rgba(0, 0, 0, 0.8);
+  content: "\25BC";
+  position: absolute;
+  text-align: center;
+}
+
+/* Style northward tooltips differently */
+.d3-tip.n:after {
+  margin: -3px 0 0 0;
+  top: 100%;
+  left: 0;
 }
