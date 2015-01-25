@@ -163,6 +163,12 @@ div.tooltip { position: absolute; width: 60px; height: 28px; padding: 2px; font:
   .area {
     fill: rgba(43, 84, 126, 0.2);
   }
+
+  .avgText {
+    fill: rgba(43, 84, 126, 0.7);
+    font-size: 18px;
+  }
+
 }
 
 
@@ -192,4 +198,11 @@ div.tooltip { position: absolute; width: 60px; height: 28px; padding: 2px; font:
   margin: -3px 0 0 0;
   top: 100%;
   left: 0;
+}
+
+
+.grid-line {
+  stroke: rgba(43, 84, 126, 0.7);
+  stroke-width: 2px;
+  stroke-dasharray: 4,4;
 }
