@@ -7,6 +7,8 @@ var data; // a global
 d3.json("http://wl-api-maps.dev/api/v1/maps/1/infographic.json", function(error, json) {
   if (error) return console.warn(error);
   data = json;
+  state_bubbles(data);
+
   state_bar(data);
   state_map(data);
   categories(data);

@@ -206,3 +206,12 @@ div.tooltip { position: absolute; width: 60px; height: 28px; padding: 2px; font:
   stroke-width: 2px;
   stroke-dasharray: 4,4;
 }
+
+
+
+#state-bubbles {
+  .circle {
+    fill: $main-color;
+    color: #fff;
+  }
+}
