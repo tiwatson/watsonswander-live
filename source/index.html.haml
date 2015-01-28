@@ -4,101 +4,16 @@ title: Welcome to Middleman
 
 %h1 Live
 
-#state-bubbles
+= partial 'views/_state_map'
 
+= partial 'views/_current'
 
-  
+= partial 'views/_categories'
 
-#d3StateMap
-  %a.replayBox.btn.btn-primary{ href: '#' }
-    .span.glyphicon.glyphicon-play
-    Replay
+= partial 'views/_top_states'
 
+= partial 'views/_costs'
 
-#info-current
-  .row
-    .col-xs-4
+= partial 'views/_towing'
 
-      %h4.with_counts
-        %span#number_days.counts X
-        Days
-
-    .col-xs-4
-      %h4.with_counts
-        %span#number_places.counts
-        Overnight Locations
-    .col-xs-4
-      %h4.with_counts
-        %span#number_states.counts 22
-        States
-
-
-
-#info-category
-  %h2.info-title Where we stay
-
-  .row
-    .col-xs-6
-      #info-category_counts
-    .col-xs-6
-      #category-counts-list
-
-
-%script{ id: 'categorylist', type: 'text/html' }
-  %ul.list-unstyled
-    {{#categories}}
-    %li.category-list-item{ 'data-key' => '{{key}}', 'data-title' => '{{title}}', 'data-percent' => '{{percent}}'}
-      %span.label {{days}}
-      {{title}}
-    {{/categories}}
-
-#info-states
-  %h2.info-title Top States
-
-
-  .row
-    .col-xs-8
-      #info-states-bar
-        %span.explained * Days spent in state
-    .col-xs-4
-      #info-state-current
-        %h3
-          Right Now
-        #info-state-current-wrapper
-          %span.current_state
-            I
-
-          %span.current_length_count 00
-          %span.current_length_days Days
-        %h3#current_state_text
-          Loading...
-
-
-
-#info-monthly-cost
-
-  %h2.info-title Monthly Costs
-
-  .row
-    .col-xs-12
-      #info-monthly-cost-graph
-
-
-
-#info-current
-  .row
-    .col-xs-4
-
-      %h4.with_counts
-        %span#miles_towed.counts X
-        Miles Towed
-
-    .col-xs-4
-      %h4.with_counts
-        Longest drive
-        %span#longest_drive.counts
-
-    .col-xs-4
-      %h4.with_counts
-        Shorest Drive
-        %span#shortest_drive.counts
+= partial 'views/_bubbles'

@@ -1,0 +1,17 @@
+#info-category
+  %h2.info-title Where we stay
+
+  .row
+    .col-xs-6
+      #info-category_counts
+    .col-xs-6
+      #category-counts-list
+
+
+%script{ id: 'categorylist', type: 'text/html' }
+  %ul.list-unstyled
+    {{#categories}}
+    %li.category-list-item{ 'data-key' => '{{key}}', 'data-title' => '{{title}}', 'data-percent' => '{{percent}}'}
+      %span.label {{days}}
+      {{title}}
+    {{/categories}}
