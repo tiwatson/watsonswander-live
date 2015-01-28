@@ -7,11 +7,6 @@ var monthlies = function (data) {
   width = 730 - margin.left - margin.right,
   height = 250 - margin.top - margin.bottom;
 
-  var parseDate = d3.time.format("%d-%m-%Y").parse,
-  bisectDate = d3.bisector(function(d) { return d.date; }).left,
-  formatValue = d3.format(",.0f"),
-  formatCurrency = function(d) { return "$" + formatValue(d); };
-
   var tipFormat = d3.time.format("%B %Y");
 
   var x = d3.time.scale()

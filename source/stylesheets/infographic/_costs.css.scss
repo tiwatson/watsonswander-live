@@ -1,0 +1,56 @@
+
+#info-pricing {
+  text-align: center;
+  .col-xs-4 {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    h5 {
+      margin-bottom: 10px;
+      font-size: 20px;
+    }
+    h2 {
+      font-weight: 400;
+      font-size: 42px;
+      color: #fff; //rgba(43, 84, 126, 0.8);
+      line-height: 42px;
+      position: relative;
+      background: rgba(84,126,43, 0.8); //#ED5840;
+      padding: 10px;
+      margin-left: 20px;
+      width: 160px;
+      -webkit-border-radius: 3px 0 0 3px;
+      -moz-border-radius: 3px 0 0 3px;
+      -ms-border-radius: 3px 0 0 3px;
+      -o-border-radius: 3px 0 0 3px;
+      border-radius: 3px 0 0 3px;
+      &:before {
+        content: "";
+        display: block;
+        position: absolute;
+        right: -18px;
+        top: 25px;
+        height: 12px;
+        width: 12px;
+        background: #fff;
+        -webkit-border-radius: 6px;
+        -moz-border-radius: 6px;
+        -ms-border-radius: 6px;
+        -o-border-radius: 6px;
+        border-radius: 6px;
+        z-index: 2;
+      }
+      &:after {
+        content: "";
+        display: block;
+        position: absolute;
+        right: -31px;
+        top: 0;
+        height: 0;
+        width: 0;
+        border-top: 31px solid transparent;
+        border-left: 31px solid rgba(84,126,43, 0.8);
+        border-bottom: 31px solid transparent;
+      }
+    }
+  }
+}
