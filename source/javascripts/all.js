@@ -12,13 +12,15 @@ formatCurrency = function(d) { return "$" + formatValue(d); };
 d3.json("http://wl-api-maps.dev/api/v1/maps/1/infographic.json", function(error, json) {
   if (error) return console.warn(error);
   data = json;
-  state_bubbles(data);
+  //state_bubbles(data);
 
   state_bar(data);
   state_map(data);
   categories(data);
   monthlies(data);
   costs(data);
+
+  state_map_2(data);
 
   d3.select('#number_days').text(data.num_nights);
   d3.select('#number_places').text(data.num_places);
