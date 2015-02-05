@@ -20,8 +20,6 @@ d3.json("http://wl-api-maps.dev/api/v1/maps/1/infographic.json", function(error,
   monthlies(data);
   costs(data);
 
-  state_map_2(data);
-
   d3.select('#number_days').text(data.num_nights);
   d3.select('#number_places').text(data.num_places);
   d3.select('#number_states').text(data.num_states);

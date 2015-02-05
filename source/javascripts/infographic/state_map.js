@@ -24,7 +24,9 @@ d3.json("/states.json", function(json) {
   states.selectAll("path")
   .data(json.features)
   .enter().append("path")
-  .attr("d", path).attr('class', 'states');
+  .attr("d", path)
+  .attr('fill', "rgba(204, 204, 204, 1)")
+  .attr("class", function(d) { return 'states state-' + d.properties.abr.toLowerCase(); });
 });
 
 function trackPlay() {
@@ -40,7 +42,6 @@ function trackPlay() {
 
   svg.selectAll("text").style("opacity", 1).transition().style("opacity", 0).duration(2500);
 
-
   track.selectAll("path")
   .transition()
   .attr("stroke-dashoffset", 0)
@@ -48,15 +49,24 @@ function trackPlay() {
   .delay(100)
   .duration(25000);
 
-
 }
-
 
 d3.select('.replayBox').on('click', function() {
   trackPlay();
   d3.event.stopPropagation();
 });
 
+d3.select('.buttonDays').on('click', function() {
+  d3.selectAll('.states').transition().duration(2000).style("fill", function(d) { return "rgba(43, 84, 126, " + d.properties.days + ")"; });
+  d3.event.stopPropagation();
+});
+
+d3.select('.buttonCostPerDay').on('click', function() {
+  d3.selectAll('.states')
+    .transition().duration(2000)
+    .style("fill", function(d) { return "rgba(43, 84, 126, " + d.properties.cost_per_day + ")"; });
+  d3.event.stopPropagation();
+});
 
 
 var state_map = function (data) {
@@ -88,6 +98,20 @@ var state_map = function (data) {
   .attr("x", function(d, i) { return projection([d.longitude, d.latitude])[0] + 3; })
   .attr("y", function(d, i) { return projection([d.longitude, d.latitude])[1] + 12; });
 
-  trackPlay();
+  //trackPlay();
+
+  var costPerDayMin = d3.min(data.states.map( function(d) { return d.cost_per_day; }));
+  var costPerDayMax = d3.max(data.states.map( function(d) { return d.cost_per_day; }));
+  var costPerDayScale = d3.scale.linear().domain([costPerDayMin,costPerDayMax]).range([0.1,0.99]);
+
+  var daysMin = d3.min(data.states.map( function(d) { return d.days; }));
+  var daysMax = d3.max(data.states.map( function(d) { return d.days; }));
+  var daysScale = d3.scale.linear().domain([daysMin,daysMax]).range([0.1,0.99]);
+
+
+  data.states.forEach(function(s) {
+    d3.select(".state-" + s.state.toLowerCase() ).data()[0].properties.cost_per_day = costPerDayScale(s.cost_per_day);
+    d3.select(".state-" + s.state.toLowerCase() ).data()[0].properties.days = daysScale(s.days);
+  });
 
 };
