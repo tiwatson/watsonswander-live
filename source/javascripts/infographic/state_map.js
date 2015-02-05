@@ -32,7 +32,17 @@ d3.json("/states.json", function(json) {
 });
 
 function trackPlay() {
-  track_on = true;
+
+  d3.selectAll('.states')
+  .transition().duration(1000)
+  .style("fill-opacity", function(d) {
+    if (typeof d.properties.days !== 'undefined') {
+      return 0.5;
+    }
+    else {
+      return 1;
+    }
+  });
 
   var totalLength = track.selectAll("path").node().getTotalLength();
 
@@ -51,26 +61,9 @@ function trackPlay() {
   .transition()
   .attr("stroke-dashoffset", 0)
   .ease('linear')
-  .delay(100)
+  .delay(1000)
   .duration(25000);
 
-}
-
-function activeStateResetFill(d) {
-  if (typeof d.properties.days !== 'undefined') {
-    return "rgba(43, 84, 126, 1)";
-  }
-  else {
-    return "rgba(204, 204, 204, 1)";
-  }
-}
-
-function activeStateResetFillOpacity() {
-  if (track_on == true) {
-    track.selectAll("path").style('opacity', 0);
-    d3.selectAll('.states').style('fill-opacity', 0.5);
-    track_on = false;
-  }
 }
 
 d3.select('.replayBox').on('click', function() {
@@ -79,30 +72,33 @@ d3.select('.replayBox').on('click', function() {
 });
 
 d3.select('.buttonTrack').on('click', function() {
-  d3.selectAll('.states')
-  .style('fill', "rgba(204, 204, 204, 1)")
-  .style("fill-opacity", 1);
+  d3.selectAll('.btn').classed('active', false);
+  d3.select(this).classed('active', true);
+
   trackPlay();
   d3.event.stopPropagation();
 });
 
-
 d3.select('.buttonDays').on('click', function() {
-  activeStateResetFillOpacity();
+  d3.selectAll('.btn').classed('active', false);
+  d3.select(this).classed('active', true);
+
+  track.selectAll("path").transition().duration(1000).style('opacity', 0);
 
   d3.selectAll('.states')
-  .style('fill', function(d) { return activeStateResetFill(d); })
-  .transition().duration(2000)
+  .transition().duration(1000)
   .style("fill-opacity", function(d) { return d.properties.days; });
   d3.event.stopPropagation();
 });
 
 d3.select('.buttonCostPerDay').on('click', function() {
-  activeStateResetFillOpacity();
+  d3.selectAll('.btn').classed('active', false);
+  d3.select(this).classed('active', true);
+
+  track.selectAll("path").transition().duration(1000).style('opacity', 0);
 
   d3.selectAll('.states')
-  .style('fill', function(d) { return activeStateResetFill(d); })
-  .transition().duration(2000)
+  .transition().duration(1000)
   .style("fill-opacity", function(d) { return d.properties.cost_per_day; });
   d3.event.stopPropagation();
 });
@@ -137,8 +133,6 @@ var state_map = function (data) {
   .attr("x", function(d, i) { return projection([d.longitude, d.latitude])[0] + 3; })
   .attr("y", function(d, i) { return projection([d.longitude, d.latitude])[1] + 12; });
 
-  trackPlay();
-
   var costPerDayMin = d3.min(data.states.map( function(d) { return d.cost_per_day; }));
   var costPerDayMax = d3.max(data.states.map( function(d) { return d.cost_per_day; }));
   var costPerDayScale = d3.scale.linear().domain([costPerDayMin,costPerDayMax]).range([0.1,0.99]);
@@ -152,5 +146,25 @@ var state_map = function (data) {
     d3.select(".state-" + s.state.toLowerCase() ).data()[0].properties.cost_per_day = costPerDayScale(s.cost_per_day);
     d3.select(".state-" + s.state.toLowerCase() ).data()[0].properties.days = daysScale(s.days);
   });
+
+  d3.selectAll('.states')
+  .style('fill', function(d) {
+    if (typeof d.properties.days !== 'undefined') {
+      return "rgba(43, 84, 126, 1)";
+    }
+    else {
+      return "rgba(204, 204, 204, 1)";
+    }
+  })
+  .style("fill-opacity", function(d) {
+    if (typeof d.properties.days !== 'undefined') {
+      return 0.5;
+    }
+    else {
+      return 1;
+    }
+  });
+
+  trackPlay();
 
 };
