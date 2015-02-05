@@ -9,6 +9,8 @@ var projection = d3.geo.albers().scale(900).translate(trans);
 var path = d3.geo.path().projection(projection);
 var state_text;
 
+var track_on = true;
+
 d3.select("#d3StateMap").append('div').attr('id', state_map_id).style('position', 'relative');
 state_map_div = d3.select("#d3StateMap").select("#" + state_map_id);
 
@@ -25,14 +27,17 @@ d3.json("/states.json", function(json) {
   .data(json.features)
   .enter().append("path")
   .attr("d", path)
-  .attr('fill', "rgba(204, 204, 204, 1)")
+  .style('fill', "rgba(204, 204, 204, 1)")
   .attr("class", function(d) { return 'states state-' + d.properties.abr.toLowerCase(); });
 });
 
 function trackPlay() {
+  track_on = true;
+
   var totalLength = track.selectAll("path").node().getTotalLength();
 
   track.selectAll("path")
+  .style('opacity', 1)
   .attr("stroke-dasharray", totalLength + " " + totalLength)
   .attr("stroke-dashoffset", totalLength)
   .transition()
@@ -51,20 +56,54 @@ function trackPlay() {
 
 }
 
+function activeStateResetFill(d) {
+  if (typeof d.properties.days !== 'undefined') {
+    return "rgba(43, 84, 126, 1)";
+  }
+  else {
+    return "rgba(204, 204, 204, 1)";
+  }
+}
+
+function activeStateResetFillOpacity() {
+  if (track_on == true) {
+    track.selectAll("path").style('opacity', 0);
+    d3.selectAll('.states').style('fill-opacity', 0.5);
+    track_on = false;
+  }
+}
+
 d3.select('.replayBox').on('click', function() {
   trackPlay();
   d3.event.stopPropagation();
 });
 
+d3.select('.buttonTrack').on('click', function() {
+  d3.selectAll('.states')
+  .style('fill', "rgba(204, 204, 204, 1)")
+  .style("fill-opacity", 1);
+  trackPlay();
+  d3.event.stopPropagation();
+});
+
+
 d3.select('.buttonDays').on('click', function() {
-  d3.selectAll('.states').transition().duration(2000).style("fill", function(d) { return "rgba(43, 84, 126, " + d.properties.days + ")"; });
+  activeStateResetFillOpacity();
+
+  d3.selectAll('.states')
+  .style('fill', function(d) { return activeStateResetFill(d); })
+  .transition().duration(2000)
+  .style("fill-opacity", function(d) { return d.properties.days; });
   d3.event.stopPropagation();
 });
 
 d3.select('.buttonCostPerDay').on('click', function() {
+  activeStateResetFillOpacity();
+
   d3.selectAll('.states')
-    .transition().duration(2000)
-    .style("fill", function(d) { return "rgba(43, 84, 126, " + d.properties.cost_per_day + ")"; });
+  .style('fill', function(d) { return activeStateResetFill(d); })
+  .transition().duration(2000)
+  .style("fill-opacity", function(d) { return d.properties.cost_per_day; });
   d3.event.stopPropagation();
 });
 
@@ -98,7 +137,7 @@ var state_map = function (data) {
   .attr("x", function(d, i) { return projection([d.longitude, d.latitude])[0] + 3; })
   .attr("y", function(d, i) { return projection([d.longitude, d.latitude])[1] + 12; });
 
-  //trackPlay();
+  trackPlay();
 
   var costPerDayMin = d3.min(data.states.map( function(d) { return d.cost_per_day; }));
   var costPerDayMax = d3.max(data.states.map( function(d) { return d.cost_per_day; }));
