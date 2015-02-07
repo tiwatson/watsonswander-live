@@ -1,15 +1,29 @@
 #d3StateMap
 
-  .stateMapButtons
-    %a.buttonTrack.btn.btn-primary.active{ href: '#' }
-      Track
+  .stateMapButtonBox
 
-    %a.buttonDays.btn.btn-primary{ href: '#' }
-      Days
+    .stateMapButtons.btn-group{ role: 'group' }
+      %a.buttonTrack.btn.btn-default.active{ href: 'javascript: void(0);' }
+        Route
 
-    %a.buttonCostPerDay.btn.btn-primary{ href: '#' }
-      Cost
+      %a.buttonDays.btn.btn-default{ href: 'javascript: void(0);' }
+        Days
 
-  %a.replayBox.btn.btn-primary{ href: '#' }
-    .span.glyphicon.glyphicon-play
-    Replay
+      %a.buttonCostPerDay.btn.btn-default{ href: 'javascript: void(0);' }
+        Cost
+
+
+    .stateMapButtonContent.contentTrack
+      %a.replayBox.btn.btn-primary{ href: 'javascript: void(0);' }
+        .span.glyphicon.glyphicon-play
+        Replay
+
+    .stateMapButtonContent.contentDays.hidden
+      %h5
+        Days spent in each state
+
+    .stateMapButtonContent.contentCostPerDay.hidden
+      %h5
+        Average nightly cost per state
+
+

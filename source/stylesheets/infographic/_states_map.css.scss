@@ -2,15 +2,21 @@
 
 #d3StateMap {
   position: relative;
-  .replayBox {
+  .btn {
     z-index: 1;
-    position: absolute;
-    bottom: 30px;
-    left: 30px;
+    position: relative;
   }
 
   .stateText {
     font-size: 12px;
+  }
+
+  .stateMapButtonBox {
+    position: absolute;
+    top: 340px;
+  }
+  .stateMapButtons {
+    margin-bottom: 6px;
   }
 }
 

@@ -75,6 +75,9 @@ d3.select('.buttonTrack').on('click', function() {
   d3.selectAll('.btn').classed('active', false);
   d3.select(this).classed('active', true);
 
+  d3.selectAll('.stateMapButtonContent').classed('hidden', true);
+  d3.select('.contentTrack').classed('hidden', false);
+
   trackPlay();
   d3.event.stopPropagation();
 });
@@ -82,6 +85,9 @@ d3.select('.buttonTrack').on('click', function() {
 d3.select('.buttonDays').on('click', function() {
   d3.selectAll('.btn').classed('active', false);
   d3.select(this).classed('active', true);
+
+  d3.selectAll('.stateMapButtonContent').classed('hidden', true);
+  d3.select('.contentDays').classed('hidden', false);
 
   track.selectAll("path").transition().duration(1000).style('opacity', 0);
 
@@ -94,6 +100,9 @@ d3.select('.buttonDays').on('click', function() {
 d3.select('.buttonCostPerDay').on('click', function() {
   d3.selectAll('.btn').classed('active', false);
   d3.select(this).classed('active', true);
+
+  d3.selectAll('.stateMapButtonContent').classed('hidden', true);
+  d3.select('.contentCostPerDay').classed('hidden', false);
 
   track.selectAll("path").transition().duration(1000).style('opacity', 0);
 
