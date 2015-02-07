@@ -37,4 +37,17 @@
   stroke-width: 2px;
   //stroke-dasharray: 4,2;
   fill: none;
+
+  stroke-opacity: 1;
+}
+
+.point {
+  fill: $main-color;
+  fill-opacity: 0;
+  stroke: #fff;
+  stroke-width: 0.5px;
+  stroke-opacity: 0;
+  &:hover {
+    stroke: #000;
+  }
 }
