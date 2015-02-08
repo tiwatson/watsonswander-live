@@ -143,9 +143,14 @@ var state_map = function (data) {
     .attr("x", function(d, i) { return projection([d.longitude, d.latitude])[0] + 3; })
     .attr("y", function(d, i) { return projection([d.longitude, d.latitude])[1] + 12; });
 
-  var stayLengthMin = d3.min(data.map_places.map( function(d) { return d.stay_length; }));
-  var stayLengthMax = d3.max(data.map_places.map( function(d) { return d.stay_length; }));
+  // var stayLengthMin = d3.min(data.map_places.map( function(d) { return d.stay_length; }));
+  // var stayLengthMax = d3.max(data.map_places.map( function(d) { return d.stay_length; }));
+  // var stayLengthScale = d3.scale.linear().domain([stayLengthMin,stayLengthMax]).range([4,25]);
+
+  var stayLengthMin = d3.min(data.map_places.map( function(d) { return d.price; }));
+  var stayLengthMax = d3.max(data.map_places.map( function(d) { return d.price; }));
   var stayLengthScale = d3.scale.linear().domain([stayLengthMin,stayLengthMax]).range([4,25]);
+
 
   map_places = [];
   data.map_places.forEach( function(place) {
@@ -154,7 +159,8 @@ var state_map = function (data) {
       properties: {
         title: place.title,
         city_state: place.city + ", " + place.state_short,
-        stay_length: place.stay_length
+        stay_length: place.stay_length,
+        price: place.price
       },
       geometry: {
         type: "Point",
@@ -167,14 +173,14 @@ var state_map = function (data) {
   });
 
   points.selectAll("circle")
-    .data(map_places.sort(function(a, b) { return b.properties.stay_length - a.properties.stay_length; }))
+    .data(map_places.sort(function(a, b) { return b.properties.price - a.properties.price; }))
     .enter().append("circle")
     .attr("d", path)
     .attr("stroke", "black")
     .attr('class', 'point')
     .attr("cx", function(d, i) { return projection(d.geometry.coordinates)[0]; })
     .attr("cy", function(d, i) { return projection(d.geometry.coordinates)[1]; })
-    .attr("r", function(d, i) { return stayLengthScale(d.properties.stay_length); })
+    .attr("r", function(d, i) { return stayLengthScale(d.properties.price); })
     .append("title")
       .text(function(d) {
         return d.properties.title + "\n" + d.properties.city_state + "\n" + d.properties.stay_length + " Nights";
