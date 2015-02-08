@@ -1,9 +1,12 @@
 var state_map_id = 'stateMap';
 width = '738';
-height = '435';
+height = '455';
 var twidth = (width/2) - 12;
 var theight = (height/2) + 8;
 var trans = [twidth,theight];
+
+var track_duration = 25000;
+var track_delay = 1000;
 
 var projection = d3.geo.albers().scale(900).translate(trans);
 var path = d3.geo.path().projection(projection);
@@ -33,47 +36,43 @@ d3.json("/states.json", function(json) {
 });
 
 function trackPlay() {
-
-  d3.selectAll('.states')
-  .transition().duration(1000)
-  .style("fill-opacity", function(d) {
-    if (typeof d.properties.days !== 'undefined') {
-      return 0.5;
-    }
-    else {
-      return 1;
-    }
-  });
-
   var totalLength = track.selectAll("path").node().getTotalLength();
 
   track.selectAll("path")
-  .style('opacity', 1)
-  .attr("stroke-dasharray", totalLength + " " + totalLength)
-  .attr("stroke-dashoffset", totalLength)
-  .transition()
-  .attr("stroke-dashoffset", totalLength)
-  .delay(0)
-  .duration(0);
-
-  svg.selectAll("text").style("opacity", 1).transition().style("opacity", 0).duration(2500);
+    .style('opacity', 1)
+    .attr("stroke-dasharray", totalLength + " " + totalLength)
+    .attr("stroke-dashoffset", totalLength)
+    .transition()
+    .attr("stroke-dashoffset", totalLength)
+    .delay(0)
+    .duration(0);
 
   track.selectAll("path")
-  .transition()
-  .attr("stroke-dashoffset", 0)
-  .ease('linear')
-  .delay(1000)
-  .duration(25000);
+    .transition()
+    .attr("stroke-dashoffset", 0)
+    .ease('linear')
+    .delay(track_delay)
+    .duration(track_duration);
 
-// d3.select(points.selectAll(".point")[0][100]).style('fill-opacity', 0.5).style('stroke-opacity', 1)
+  svg.selectAll(".stateText").style("opacity", 0);
 
-// points.selectAll(".point").transition().ease('linear')
-//   .delay(1000)
-//   .duration(25000).tween("nil", function(d,i) {
-//     var ii = d3.interpolateRound(0, 100);
-//     console.log(i,ii);
-//   d3.select(points.selectAll(".point")[0][i]).style('fill-opacity', 0.5).style('stroke-opacity', 1)
-// });
+  svg.selectAll(".stateText-0")
+    .transition()
+      .ease('linear')
+      .style("opacity", 1)
+      .duration(track_delay)
+    .transition()
+      .ease('linear')
+      .style("opacity", 0)
+      .delay(track_duration / 5)
+      .duration(track_delay);
+
+  svg.selectAll(".stateText-1")
+    .transition()
+      .ease('linear')
+      .style("opacity", 1)
+      .delay(track_duration + track_delay)
+      .duration(track_delay);
 
 }
 
@@ -89,7 +88,7 @@ d3.select('.buttonTrack').on('click', function() {
   d3.selectAll('.stateMapButtonContent').classed('hidden', true);
   d3.select('.contentTrack').classed('hidden', false);
 
-  points.selectAll(".point").transition().style('fill-opacity', 0).style('stroke-opacity', 0).duration(1000);
+  points.selectAll(".point").transition().style('fill-opacity', 0).style('stroke-opacity', 0).duration(track_delay);
   trackPlay();
   d3.event.stopPropagation();
 
@@ -101,10 +100,12 @@ d3.select('.buttonPoints').on('click', function() {
   d3.select(this).classed('active', true);
 
   d3.selectAll('.stateMapButtonContent').classed('hidden', true);
-  d3.select('.contentDays').classed('hidden', false);
+  d3.selectAll('.contentPoints').classed('hidden', false);
 
-  track.selectAll("path").transition().duration(1000).style('opacity', 0.15).attr("stroke-dashoffset", 0);
-  points.selectAll(".point").transition().style('fill-opacity', 0.5).style('stroke-opacity', 1).duration(1000);
+  svg.selectAll(".stateText").transition().duration(track_delay).style("opacity", 0);
+
+  track.selectAll("path").transition().duration(track_delay).style('opacity', 0.15).attr("stroke-dashoffset", 0);
+  points.selectAll(".point").transition().style('fill-opacity', 0.5).style('stroke-opacity', 1).duration(track_delay);
   d3.event.stopPropagation();
 });
 
@@ -125,18 +126,22 @@ var state_map = function (data) {
   .attr("stroke-dashoffset", totalLength);
 
   state_text = svg.selectAll("text")
-  .data([data.location_first, data.location_current])
-  .enter();
+    .data([data.location_first, data.location_current])
+    .enter();
 
-  state_text.append("text").attr("class", "stateText")
-  .text(function(d) { return d.city + ", " + d.state_short; })
-  .attr("x", function(d, i) { return projection([d.longitude, d.latitude])[0] + 3; })
-  .attr("y", function(d, i) { return projection([d.longitude, d.latitude])[1]; });
+  state_text.append("text")
+    .attr("class", function(d,i) { return "stateText stateText-" + i%2; })
+    .style("opacity", 0)
+    .text(function(d) { return d.city + ", " + d.state_short; })
+    .attr("x", function(d, i) { return projection([d.longitude, d.latitude])[0] + 3; })
+    .attr("y", function(d, i) { return projection([d.longitude, d.latitude])[1]; });
 
-  state_text.append("text").attr("class", "stateText")
-  .text(function(d) { return d.arrived; })
-  .attr("x", function(d, i) { return projection([d.longitude, d.latitude])[0] + 3; })
-  .attr("y", function(d, i) { return projection([d.longitude, d.latitude])[1] + 12; });
+  state_text.append("text")
+    .attr("class", function(d,i) { return "stateText stateText-" + i%2; })
+    .style("opacity", 0)
+    .text(function(d) { return d.arrived; })
+    .attr("x", function(d, i) { return projection([d.longitude, d.latitude])[0] + 3; })
+    .attr("y", function(d, i) { return projection([d.longitude, d.latitude])[1] + 12; });
 
   var stayLengthMin = d3.min(data.map_places.map( function(d) { return d.stay_length; }));
   var stayLengthMax = d3.max(data.map_places.map( function(d) { return d.stay_length; }));
@@ -176,5 +181,23 @@ var state_map = function (data) {
       });
 
   trackPlay();
+
+
+  var legend = svg.append("g")
+      .attr("class", "stateMapButtonContent contentPoints hidden")
+      .attr("transform", "translate(40,450)")
+    .selectAll("g")
+      .data([stayLengthMin,stayLengthMax/2,stayLengthMax])
+    .enter().append("g");
+
+  legend.append("circle")
+    .attr("cy", function(d) { return -stayLengthScale(d); })
+    .attr("r",  function(d) { return stayLengthScale(d); });
+
+  legend.append("text")
+    .attr("y", function(d) { return (-2 * stayLengthScale(d)) - 5; })
+    .attr("x", 52)
+    .attr("dy", "1.3em")
+    .text(function (d) { return "" + d + " nights" });
 
 };
