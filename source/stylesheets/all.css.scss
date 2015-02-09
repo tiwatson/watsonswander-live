@@ -24,6 +24,11 @@ $main-color: rgba(43, 84, 126, 1); // #2B547E; // steelblue
   font-weight: normal;
   font-style: normal;
 }
+@import 'state_font';
+
+body {
+  background: url("/images/bg_l.png");
+}
 
 .container{
   max-width: none !important;
@@ -67,7 +72,11 @@ h4.with_counts {
 @import 'infographic/states_map';
 @import 'infographic/costs';
 
-
+#loading {
+  #loading-state {
+    font-family: StateFaceRegular;
+  }
+}
 
 // was 41, 128, 185
 $colors_blue: rgba(43, 84, 126,1.0), rgba(43, 84, 126,0.9), rgba(43, 84, 126,0.8), rgba(43, 84, 126,0.7), rgba(43, 84, 126,0.6), rgba(43, 84, 126,0.5), rgba(43, 84, 126,0.4), rgba(43, 84, 126,0.3), rgba(43, 84, 126,0.2), rgba(43, 84, 126,0.1), rgba(43, 84, 126,0.1), rgba(43, 84, 126,0.1), rgba(43, 84, 126,0.1);

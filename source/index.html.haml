@@ -1,19 +1,23 @@
 ---
-title: Welcome to Middleman
+title: Watsons Wander Live
 ---
 
 %h1 Live
 
-= partial 'views/_state_map'
+#loading
+  %h2
+    Loading...
+    %span#loading-state
 
-= partial 'views/_current'
+#content.hidden
+  = partial 'views/_state_map'
 
-= partial 'views/_categories'
+  = partial 'views/_current'
 
-= partial 'views/_top_states'
+  = partial 'views/_categories'
 
-= partial 'views/_costs'
+  = partial 'views/_top_states'
 
-= partial 'views/_towing'
+  = partial 'views/_costs'
 
-= partial 'views/_bubbles'
+  = partial 'views/_towing'

@@ -9,6 +9,14 @@ formatValue = d3.format(",.0f"),
 costWithCents = d3.format("$,.2f"),
 formatCurrency = function(d) { return "$" + formatValue(d); };
 
+var loadingState = function() {
+  var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+  d3.select('#loading-state').html( possible.charAt(Math.floor(Math.random() * possible.length)) );
+}
+
+//d3.timer(loadingState, 1000, 10000);
+loadingState();
+
 d3.json("http://wl-api-maps.dev/api/v1/maps/1/infographic.json", function(error, json) {
   if (error) return console.warn(error);
   data = json;
@@ -26,5 +34,8 @@ d3.json("http://wl-api-maps.dev/api/v1/maps/1/infographic.json", function(error,
 
   d3.select('#miles_towed').text(data.miles_towed);
   d3.select('#longest_drive').text(data.longest_arrival_distance.title);
+
+  d3.select('#loading').classed('hidden', true);
+  d3.select('#content').classed('hidden', false);
 
 });
