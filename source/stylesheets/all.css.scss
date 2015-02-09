@@ -1,5 +1,7 @@
 @charset "utf-8";
 
+$gray-lighter:           lighten(#000, 93.5%) !default; // #eee
+
 $body-bg: none !default; //#3498db !default;
 
 $navbar-inverse-bg: #1b926c !default;
@@ -11,6 +13,19 @@ $brand-info: #d35400 !default;
 $grid-float-breakpoint: 0;
 
 $main-color: rgba(43, 84, 126, 1); // #2B547E; // steelblue
+
+$navbar-default-color:             #eee !default;
+$navbar-default-bg:                #9A1D23 !default;
+$navbar-default-border:            darken($navbar-default-bg, 6.5%) !default;
+
+// Navbar links
+$navbar-default-link-color:                $gray-lighter !default;
+$navbar-default-link-hover-color:          #6c1b17 !default;
+$navbar-default-link-hover-bg:             transparent !default;
+$navbar-default-link-active-color:         #6c1b17 !default;
+$navbar-default-link-active-bg:            transparent !default; //darken($navbar-default-bg, 6.5%) !default;
+$navbar-default-link-disabled-color:       #ccc !default;
+$navbar-default-link-disabled-bg:          transparent !default;
 
 @import 'bootstrap';
 
@@ -33,6 +48,50 @@ body {
 .container{
   max-width: none !important;
   width: 768px; //660px;
+}
+
+.banner {
+  margin-top: 4px;
+  border-bottom: 2px dashed #6c1b17;
+  border-top: 2px dashed #6c1b17;
+  box-shadow: 0 0 0 4px #9A1D23, 2px 1px 6px 3px rgba(10, 10, 0, 0.5);
+  .navbar-brand {
+    font-size: 42px;
+    text-shadow: 0px 2px 3px #555;
+    color: $gray-lighter;
+  }
+  .navbar-nav {
+    margin-left: 8%;
+    // @media (max-width: $screen-sm-max) {
+    //   margin-left: 0;
+    // }
+    // @media (max-width: $screen-xs-max) {
+    //   li {
+    //     a:nth-of-type(1) {
+    //       padding-left: 0;
+    //     }
+    //   }
+    // }
+
+    font-size: 22px;
+    font-weight: bold;
+    letter-spacing: .05em;
+    li {
+      margin-right: 0px;
+      a {
+        text-shadow: 0px 2px 3px #555;
+        &:hover,
+        &:focus {
+          text-shadow: none;
+        }
+      }
+      &.active {
+        a {
+          text-shadow: none;
+        }
+      }
+    }
+  }
 }
 
 // #main-container {

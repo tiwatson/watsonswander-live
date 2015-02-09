@@ -13,6 +13,23 @@
   </head>
 
   <body class="<%= page_classes %>">
+
+    <header class="banner navbar navbar-default navbar-static-top" role="banner">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="http://www.watsonswander.com/">WatsonsWander</a>
+        </div>
+
+        <nav class="" role="navigation">
+          <ul id="menu-primary-navigation" class="nav navbar-nav"><li class="menu-who"><a href="http://www.watsonswander.com/who/">Who</a></li>
+            <li class="menu-what"><a href="http://www.watsonswander.com/what/">What</a></li>
+            <li class="menu-where"><a href="http://www.watsonswander.com/where/">Where</a></li>
+            <li class="menu-why"><a href="http://www.watsonswander.com/why/">Why</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
     <div class='container'>
       <%= yield %>
     </div>
