@@ -1,6 +1,8 @@
 //= require_tree .
 
 
+var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+
 var data; // a global
 
 var parseDate = d3.time.format("%d-%m-%Y").parse,
@@ -10,9 +12,9 @@ costWithCents = d3.format("$,.2f"),
 formatCurrency = function(d) { return "$" + formatValue(d); };
 
 var loadingState = function() {
-  var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
   d3.select('#loading-state').html( possible.charAt(Math.floor(Math.random() * possible.length)) );
 }
+var stateInterval = setInterval(loadingState, 100);
 
 //d3.timer(loadingState, 1000, 10000);
 loadingState();
@@ -34,6 +36,10 @@ d3.json("http://wl-api-maps.dev/api/v1/maps/1/infographic.json", function(error,
 
   d3.select('#miles_towed').text(data.miles_towed);
   d3.select('#longest_drive').text(data.longest_arrival_distance.title);
+
+  if (stateInterval) {
+    clearInterval(stateInterval);
+  }
 
   d3.select('#loading').classed('hidden', true);
   d3.select('#content').classed('hidden', false);
