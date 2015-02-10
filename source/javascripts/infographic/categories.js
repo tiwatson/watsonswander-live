@@ -45,7 +45,7 @@ var totalLabelCount = center_group.append("svg:text")
 var categories = function(data) {
   category_counts = data.categories.sort(function(a,b) { return b.percent - a.percent; });
 
-  var color = d3.scale.linear().domain([0,data.categories.length]).range([0.1, 1]);
+  var color = d3.scale.linear().domain([0,data.categories.length]).range([0, 1]);
 
   var g = category_svg.selectAll(".arc")
   .data(pie(category_counts))

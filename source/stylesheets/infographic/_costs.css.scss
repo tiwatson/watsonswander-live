@@ -2,7 +2,6 @@
 #info-pricing {
   text-align: center;
   .col-xs-4 {
-    margin-top: 20px;
     margin-bottom: 20px;
     h5 {
       margin-bottom: 10px;
@@ -52,5 +51,19 @@
         border-bottom: 31px solid transparent;
       }
     }
+  }
+}
+
+#info-price-free {
+  text-align: center;
+  h4.state-free-title {
+    margin: 5px 0;
+  }
+  .state-icon {
+    font-family: StateFaceRegular;
+    font-size: 70px;
+    line-height: 1;
+    color: $main-color;
+    display: inline-block;
   }
 }
