@@ -1,19 +1,19 @@
 
-#info-pricing
+.info-pricing
 
   %h2.info-title What we pay
   .row
     .col-xs-4
-      %h5
+      %h3
         Last Night
       %h2#price_last $0.00
     .col-xs-4
-      %h5
+      %h3
         Per Day
       %h2#per_night_fee $0.00
 
     .col-xs-4
-      %h5
+      %h3
         Per Month
       %h2#per_month_fee $0.00
 
@@ -47,3 +47,36 @@
       %h4.with_counts
         %span#walmart_count.counts
         Walmarts
+
+    .col-xs-3
+      %h4.with_counts
+        Consecutive Nights Free
+        %span#consecutive_free.counts
+
+.info-pricing
+
+  .row
+    .col-xs-4
+      %h4
+        Most Expensive
+        %br/
+        Overall
+      %h2#price_most_o
+      %h6#price_most_o_where
+
+    .col-xs-4
+      %h4
+        Most Expensive
+        %br/
+        Private Park
+      %h2#price_most_pp
+      %h6#price_most_pp_where
+
+    .col-xs-4
+      %h4
+        Most Expensive
+        %br/
+        Public Campground
+      %h2#price_most_pc
+      %h6#price_most_pc_where
+

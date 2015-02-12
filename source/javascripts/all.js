@@ -68,6 +68,10 @@ var state_face = {
   PR: "3"
 }
 
+function where(map_place) {
+  return map_place.title + "<br/>" + map_place.city + ", " + map_place.state_short + "<br/>" + map_place.arrived;
+}
+
 var loadingState = function() {
   d3.select('#loading-state').html( possible.charAt(Math.floor(Math.random() * possible.length)) );
 }
@@ -93,6 +97,10 @@ d3.json("http://wl-api-maps.dev/api/v1/maps/1/infographic.json", function(error,
 
   d3.select('#percentage_free_nights').text(formatPercent(data.percentage_free_nights));
   d3.select('#walmart_count').text(data.walmart_count);
+  d3.select('#consecutive_free').text(data.consecutive_free);
+  data.states.filter( function(d) { return d.cost == 0; }).sort(function(a,b) { return a.state > b.state; }).forEach( function(s) {
+    d3.select('#freeStateItems').append('span').attr('class', 'state-icon').html(state_face[s.state]);
+  });
 
   d3.select('#miles_towed').text(data.miles_towed);
   d3.select('#longest_drive').text(data.longest_arrival_distance.arrival_distance);
@@ -104,10 +112,6 @@ d3.json("http://wl-api-maps.dev/api/v1/maps/1/infographic.json", function(error,
   d3.select('#shortest_drive_to').text(data.shortest_arrival_distance.title);
   d3.select('#shortest_drive_to_more').text(data.shortest_arrival_distance.city + ", " + data.shortest_arrival_distance.state_short);
   d3.select('#shortest_drive_date').text(data.shortest_arrival_distance.arrived);
-
-  data.states.filter( function(d) { return d.cost == 0; }).sort(function(a,b) { return a.state > b.state; }).forEach( function(s) {
-    d3.select('#freeStateItems').append('span').attr('class', 'state-icon').html(state_face[s.state]);
-  });
 
   if (stateInterval) {
     clearInterval(stateInterval);

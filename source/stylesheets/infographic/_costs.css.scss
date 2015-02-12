@@ -1,11 +1,14 @@
 
-#info-pricing {
+.info-pricing {
   text-align: center;
   .col-xs-4 {
     margin-bottom: 20px;
-    h5 {
+    h3 {
       margin-bottom: 10px;
       font-size: 20px;
+    }
+    h4 {
+      margin-bottom: 10px;
     }
     h2 {
       font-weight: 400;
@@ -55,6 +58,7 @@
 }
 
 #info-price-free {
+  margin: 24px 0;
   text-align: center;
   h4.state-free-title {
     margin: 5px 0;
