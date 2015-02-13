@@ -39,20 +39,24 @@ function trackPlay() {
   var totalLength = track.selectAll("path").node().getTotalLength();
 
   track.selectAll("path")
-    .style('opacity', 1)
-    .attr("stroke-dasharray", totalLength + " " + totalLength)
-    .attr("stroke-dashoffset", totalLength)
+    // fade out current path
     .transition()
-    .attr("stroke-dashoffset", totalLength)
-    .delay(0)
-    .duration(0);
+      .style('opacity', 0)
+      .ease('linear')
+      .delay(0)
+      .duration(track_delay).each("end",
+        function() {
+          // fade out complete - reset opacity and dashoffset
+          track.selectAll("path").style('opacity', 1).attr("stroke-dashoffset", totalLength);
+        }
+      )
 
-  track.selectAll("path")
+    // show track path
     .transition()
-    .attr("stroke-dashoffset", 0)
-    .ease('linear')
-    .delay(track_delay)
-    .duration(track_duration);
+      .attr("stroke-dashoffset", 0)
+      .ease('linear')
+      .delay(track_delay)
+      .duration(track_duration);
 
   svg.selectAll(".stateText").style("opacity", 0);
 
@@ -78,7 +82,6 @@ function trackPlay() {
 
 d3.select('.replayBox').on('click', function() {
   trackPlay();
-  d3.event.stopPropagation();
 });
 
 d3.select('.buttonTrack').on('click', function() {
@@ -89,10 +92,7 @@ d3.select('.buttonTrack').on('click', function() {
   d3.select('.contentTrack').classed('hidden', false);
 
   points.selectAll(".point").transition().style('fill-opacity', 0).style('stroke-opacity', 0).duration(track_delay);
-  trackPlay();
-  d3.event.stopPropagation();
-
-
+  track.selectAll("path").transition().duration(track_delay).style('opacity', 1).attr("stroke-dashoffset", 0);
 });
 
 d3.select('.buttonPoints').on('click', function() {
@@ -106,7 +106,6 @@ d3.select('.buttonPoints').on('click', function() {
 
   track.selectAll("path").transition().duration(track_delay).style('opacity', 0.15).attr("stroke-dashoffset", 0);
   points.selectAll(".point").transition().style('fill-opacity', 0.5).style('stroke-opacity', 1).duration(track_delay);
-  d3.event.stopPropagation();
 });
 
 
@@ -180,6 +179,11 @@ var state_map = function (data) {
         return d.properties.title + "\n" + d.properties.city_state + "\n" + d.properties.stay_length + " Nights";
       });
 
+
+  var totalLength = track.selectAll("path").node().getTotalLength();
+  track.selectAll("path")
+    .style('opacity', 1)
+    .attr("stroke-dasharray", totalLength + " " + totalLength);
   trackPlay();
 
 
