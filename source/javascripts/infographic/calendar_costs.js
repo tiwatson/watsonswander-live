@@ -11,7 +11,7 @@ var day = d3.time.format("%w"),
     format = d3.time.format("%Y-%m-%d");
 
 var color = d3.scale.quantize()
-    .domain([-.05, .05])
+    .domain([0, 35])
     .range(d3.range(11).map(function(d) { return "q" + d + "-11"; }));
 
 var svg = d3.select("#calendarCosts").selectAll("svg")
@@ -70,7 +70,8 @@ svg.selectAll(".month")
 
 
     rect.filter(function(d) { return d in calendar_data; })
-      .style("fill", function(d) { return "rgba(43, 84, 126, " + priceScale(calendar_data[d]) + ")"; })
+      .attr("class", function(d) { return "day " + color(calendar_data[d]); })
+      //.style("fill", function(d) { return "rgba(43, 84, 126, " + priceScale(calendar_data[d]) + ")"; })
       .select("title")
       .text(function(d) { return d + ": " + priceScale(calendar_data[d]); });
 
