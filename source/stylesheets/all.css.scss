@@ -291,3 +291,31 @@ div.tooltip { position: absolute; width: 60px; height: 28px; padding: 2px; font:
     color: #fff;
   }
 }
+
+
+.towing {
+  background-image: url('/images/rig_profile_left.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 150px;
+  border-bottom: solid 1px #ccc;
+  position: relative;
+  margin-bottom: 12px;
+
+  .towing_total {
+    position: absolute;
+    top: 20px;
+    left: 110px;
+  }
+}
+
+.elevation_icon {
+  fill: rgba(43, 84, 126, 1);
+  fill-opacity: 1;
+  fill-rule: evenodd;
+  stroke: none;
+}
+
+.elevation-row {
+  margin-top: 24px;
+}

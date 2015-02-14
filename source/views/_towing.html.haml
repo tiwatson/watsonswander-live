@@ -2,17 +2,16 @@
 
   %h2.info-title Towing our house
 
-  .row
-    .col-xs-4
-
+  .row.towing
+    .towing_total
       %h4.with_counts
         Miles Towed
         %span#miles_towed.counts
 
-
+  .row
     .col-xs-4
       %h4.with_counts
-        Longest drive
+        Longest Drive
         %span#longest_drive.counts
       %h6
         %span#longest_drive_to
@@ -20,6 +19,11 @@
         %span#longest_drive_to_more
         %br/
         %span#longest_drive_date
+
+    .col-xs-4
+      %h4.with_counts
+        Average Drive
+        %span#average_towed.counts
 
     .col-xs-4
       %h4.with_counts

@@ -7,6 +7,23 @@
     .col-xs-6
       #category-counts-list
 
+#info-current.elevation-row
+  .row
+    .col-xs-4
+
+      %h4.with_counts
+        Lowest Elevation
+        %span#elevation_lowest.counts
+      %h6#elevation_lowest_where
+
+    .col-xs-4#elevation_icon
+
+    .col-xs-4
+      %h4.with_counts
+        Highest Elevation
+        %span#elevation_highest.counts
+      %h6#elevation_highest_where
+
 
 %script{ id: 'categorylist', type: 'text/html' }
   %ul.list-unstyled
