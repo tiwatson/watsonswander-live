@@ -294,9 +294,9 @@ div.tooltip { position: absolute; width: 60px; height: 28px; padding: 2px; font:
 
 
 .towing {
-  background-image: url('/images/rig_profile_left.png');
+  background-image: url('/images/airstream_150h_b.png'); //url('/images/rig_profile_left.png');
   background-repeat: no-repeat;
-  background-position: center;
+  background-position: left;
   height: 150px;
   border-bottom: solid 1px #ccc;
   position: relative;
@@ -304,8 +304,8 @@ div.tooltip { position: absolute; width: 60px; height: 28px; padding: 2px; font:
 
   .towing_total {
     position: absolute;
-    top: 20px;
-    left: 110px;
+    top: 23px;
+    left: 35px;
   }
 }
 
