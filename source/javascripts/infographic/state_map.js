@@ -142,7 +142,7 @@ var state_map = function (data) {
     .attr("x", function(d, i) { return projection([d.longitude, d.latitude])[0] + 3; })
     .attr("y", function(d, i) { return projection([d.longitude, d.latitude])[1] + 12; });
 
-  var stayLengthMin = d3.min(data.map_places.map( function(d) { return d.stay_length; }));
+  var stayLengthMin = 1; // d3.min(data.map_places.map( function(d) { return d.stay_length; }));
   var stayLengthMax = d3.max(data.map_places.map( function(d) { return d.stay_length; }));
   var stayLengthScale = d3.scale.linear().domain([stayLengthMin,stayLengthMax]).range([4,25]);
 

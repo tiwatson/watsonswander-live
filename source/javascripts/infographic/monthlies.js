@@ -1,12 +1,12 @@
 
-var monthlies = function (data) {
-
-  mc_data = data.monthlies;
+var Monthlies = (function() {
 
   var margin = {top: 20, right: 20, bottom: 40, left: 20},
   width = 730 - margin.left - margin.right,
   height = 250 - margin.top - margin.bottom;
 
+  var circle;
+  var current_tip;
   var tipFormat = d3.time.format("%B %Y");
 
   var x = d3.time.scale()
@@ -27,94 +27,85 @@ var monthlies = function (data) {
   .x(function(d) { return x(d.date); })
   .y(function(d) { return y(d.cost); });
 
-
   var svg = d3.select("#info-monthly-cost-graph").append("svg")
   .attr("width", width + margin.left + margin.right)
   .attr("height", height + margin.top + margin.bottom)
   .append("g")
   .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-  mc_data.forEach(function(d) {
-    d.date = parseDate(d.date);
-    d.cost = +d.cost;
-  });
+  function Monthlies(data) {
+    mc_data = data.monthlies;
 
-  mc_data.sort(function(a, b) {
-    return a.date - b.date;
-  });
+    mc_data.forEach(function(d) {
+      d.date = parseDate(d.date);
+      d.cost = +d.cost;
+    });
 
-  x.domain([mc_data[0].date, mc_data[mc_data.length - 1].date]);
-  y.domain(d3.extent(mc_data, function(d) { return d.cost; }));
+    mc_data.sort(function(a, b) {
+      return a.date - b.date;
+    });
 
-  svg.append("g")
-  .attr("class", "x axis")
-  .attr("transform", "translate(0," + height + ")")
-  .call(xAxis);
+    x.domain([mc_data[0].date, mc_data[mc_data.length - 1].date]);
+    y.domain(d3.extent(mc_data, function(d) { return d.cost; }));
 
-  // svg.append("g")
-  //     .attr("class", "y axis")
-  //     .call(yAxis)
-  //   .append("text")
-  //     .attr("transform", "rotate(-90)")
-  //     .attr("y", 6)
-  //     .attr("dy", ".71em")
-  //     .style("text-anchor", "end")
-  //     .text("Price ($)");
+    svg.append("g")
+    .attr("class", "x axis")
+    .attr("transform", "translate(0," + height + ")")
+    .call(xAxis);
 
-  svg.append("path")
-  .datum(mc_data)
-  .attr("class", "line")
-  .attr("d", line);
+    svg.append("path")
+    .datum(mc_data)
+    .attr("class", "line")
+    .attr("d", line);
 
-  var circle = svg.selectAll(".dot")
-  .data(mc_data)
-  .enter().append("circle")
-  .attr("class", "dot")
-  .attr("cx", line.x())
-  .attr("cy", line.y())
-  .attr("r", 3.5);
+    circle = svg.selectAll(".dot")
+      .data(mc_data)
+      .enter().append("circle")
+      .attr("class", "dot")
+      .attr("cx", line.x())
+      .attr("cy", line.y())
+      .attr("r", 3.5);
 
-  var area = d3.svg.area().interpolate('monotone')
-  .x(function(d) { return x(d.date); })
-  .y0(height)
-  .y1(function(d) { return y(d.cost); });
+    var area = d3.svg.area().interpolate('monotone')
+    .x(function(d) { return x(d.date); })
+    .y0(height)
+    .y1(function(d) { return y(d.cost); });
 
-  svg.append("path")
-  .datum(mc_data)
-  .attr("class", "area")
-  .attr("d", area);
+    svg.append("path")
+    .datum(mc_data)
+    .attr("class", "area")
+    .attr("d", area);
 
-  var startX = d3.min(x.domain()),
-  endX = d3.max(x.domain()),
-  lineY = (data.per_night_fee * 30);
-  var lines = [{x1: startX, x2: endX, y1: lineY, y2: lineY}];
+    var startX = d3.min(x.domain()),
+    endX = d3.max(x.domain()),
+    lineY = (data.per_night_fee * 30);
+    var lines = [{x1: startX, x2: endX, y1: lineY, y2: lineY}];
 
-  svg.append("g").selectAll(".grid-line")
-  .data(lines).enter()
-  .append("line")
-  .attr("class", "grid-line")
-  .attr("x1", function(d){ return x(d.x1); })
-  .attr("x2", function(d){ return x(d.x2); })
-  .attr("y1", function(d){ return y(d.y1); })
-  .attr("y2", function(d){ return y(d.y2); });
+    svg.append("g").selectAll(".grid-line")
+    .data(lines).enter()
+    .append("line")
+    .attr("class", "grid-line")
+    .attr("x1", function(d){ return x(d.x1); })
+    .attr("x2", function(d){ return x(d.x2); })
+    .attr("y1", function(d){ return y(d.y1); })
+    .attr("y2", function(d){ return y(d.y2); });
 
-  svg.append("text").attr("class", "avgText")
-  .text('Avg: ' + formatCurrency(lineY))
-  .attr("x", 30)
-  .attr("y", 105);
+    svg.append("text").attr("class", "avgText")
+    .text('Avg: ' + formatCurrency(lineY))
+    .attr("x", 30)
+    .attr("y", 105);
 
-  tip = d3.tip().attr('class', 'd3-tip').offset([-10, 0]).html(function(d) { return tipFormat(d.date) + "<br/>" + formatCurrency(d.cost); });
-  svg.call(tip);
+    tip = d3.tip().attr('class', 'd3-tip').offset([-10, 0]).html(function(d) { return tipFormat(d.date) + "<br/>" + formatCurrency(d.cost); });
+    svg.call(tip);
 
-  svg.append("rect")
-  .attr("class", "overlay")
-  .attr("width", width)
-  .attr("height", height)
-  // .on("mouseover", mousemove )
-  .on("mouseout", mouseout )
-  .on("mousemove", mousemove );
-
-  var current_tip;
+    svg.append("rect")
+    .attr("class", "overlay")
+    .attr("width", width)
+    .attr("height", height)
+    // .on("mouseover", mousemove )
+    .on("mouseout", mouseout )
+    .on("mousemove", mousemove );
+  }
 
   function mouseout() {
     var pos = d3.mouse(this);
@@ -137,4 +128,5 @@ var monthlies = function (data) {
     }
   }
 
-};
+  return Monthlies;
+})();
