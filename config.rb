@@ -40,6 +40,8 @@
 #   activate :livereload
 # end
 
+require "uglifier"
+
 helpers do
 
   def page_title
@@ -81,7 +83,7 @@ configure :build do
   activate :minify_css
 
   # Minify Javascript on build
-  activate :minify_javascript
+  activate :minify_javascript, :compressor => ::Uglifier.new(define: { DEVMODE: false  })
 
   # Enable cache buster
   # activate :asset_hash
