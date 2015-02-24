@@ -1,13 +1,13 @@
 //= require_tree .
 
-var apiHost = 'wanderinglabs-api-map.herokuapp.com';
+var apiUrl = '/data.json';
 
 // Uglifier will remove
 if (typeof DEVMODE === "undefined") {
     DEVMODE = true;
 }
 if (DEVMODE) {
-  apiHost = 'wl-api-maps.dev'
+  apiUrl = 'http://wl-api-maps.dev/api/v1/maps/1/infographic.json'
 }
 
 var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
@@ -89,7 +89,7 @@ var loadingState = function() {
 var stateInterval = setInterval(loadingState, 100);
 loadingState();
 
-d3.json("http://" + apiHost + "/api/v1/maps/1/infographic.json", function(error, json) {
+d3.json(apiUrl, function(error, json) {
   if (error) return console.warn(error);
   data = json;
 
