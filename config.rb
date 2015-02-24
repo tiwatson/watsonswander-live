@@ -94,7 +94,7 @@ configure :build do
 end
 
 activate :s3_sync do |s3_sync|
-  s3_sync.bucket                     = 'wanderinglabs.com' # The name of the S3 bucket you are targetting. This is globally unique.
+  s3_sync.bucket                     = 'live.watsonswander.com' # The name of the S3 bucket you are targetting. This is globally unique.
   s3_sync.region                     = 'us-east-1'     # The AWS region for your bucket.
   s3_sync.verbose                   = true
 end

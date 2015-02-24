@@ -3,6 +3,7 @@
 source 'https://rubygems.org'
 
 gem "middleman", "~>3.3.7"
+gem 'middleman-s3_sync'
 
 # Live-reloading plugin
 gem "middleman-livereload", "~> 3.1.0"
@@ -15,3 +16,5 @@ gem "tzinfo-data", platforms: [:mswin, :mingw]
 
 gem 'compass', '~> 1.0.3'
 gem 'bootstrap-sass', require: false
+
+gem 'colorize', '0.7.3'
