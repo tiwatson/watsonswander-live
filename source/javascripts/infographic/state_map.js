@@ -1,3 +1,6 @@
+var StateMap = (function() {
+
+
 var state_map_id = 'stateMap';
 width = '738';
 height = '455';
@@ -109,7 +112,8 @@ d3.select('.buttonPoints').on('click', function() {
 });
 
 
-var state_map = function (data) {
+function StateMap(data) {
+
 
   path_data = [{"type":"Feature","id":"01","properties":{"name":"Linestring"},"geometry":{"type":"LineString","coordinates": data.path }}];
 
@@ -205,3 +209,6 @@ var state_map = function (data) {
     .text(function (d) { return "" + d + " nights" });
 
 };
+
+return StateMap;
+})();

@@ -93,6 +93,7 @@ d3.json(apiUrl, function(error, json) {
   if (error) return console.warn(error);
   data = json;
 
+  new StateMap(data);
   new Categories(data);
   new StateBar(data);
   new Elevation(data);
@@ -101,7 +102,6 @@ d3.json(apiUrl, function(error, json) {
   new Monthlies(data);
   new Towing(data);
 
-  state_map(data);
 
   d3.select('#number_days').text(data.num_nights);
   d3.select('#number_places').text(data.num_places);
