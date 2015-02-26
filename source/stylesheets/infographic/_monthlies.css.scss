@@ -1,0 +1,62 @@
+
+#info-monthly-cost {
+  .axis path, .axis line {
+    fill: none;
+    stroke: #000;
+    shape-rendering: crispEdges;
+    display: none;
+  }
+
+  .y.axis {
+    //display: none;
+  }
+
+  .x.axis path {
+    display: none;
+  }
+
+  .line {
+    fill: none;
+    stroke: $main-color;
+    stroke-width: 4px;
+  }
+
+  .overlay {
+    fill: none;
+    pointer-events: all;
+  }
+
+  .focus circle {
+    fill: none;
+    stroke: $main-color;
+  }
+
+  .focus-text {
+    fill: $main-color;
+    background-color: #ff0000;
+  }
+
+  .dot {
+    fill: $main-color;
+    stroke: $main-color;
+    stroke-width: 3.5px;
+  }
+
+  .area {
+    fill: rgba(43, 84, 126, 0.2);
+  }
+
+  .avgText {
+    fill: rgba(43, 84, 126, 0.7);
+    font-size: 18px;
+  }
+
+}
+
+
+.grid-line {
+  stroke: rgba(43, 84, 126, 0.7);
+  stroke-width: 2px;
+  stroke-dasharray: 4,4;
+}
+

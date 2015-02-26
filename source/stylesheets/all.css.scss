@@ -27,18 +27,8 @@ $navbar-default-link-active-bg:            transparent !default; //darken($navba
 $navbar-default-link-disabled-color:       #ccc !default;
 $navbar-default-link-disabled-bg:          transparent !default;
 
+@import 'normalize';
 @import 'bootstrap';
-
-@font-face {
-  font-family: 'StateFaceRegular';
-  src: url(font-path('stateface-regular-webfont.eot'));
-  src: url(font-path('stateface-regular-webfont.eot') + '?#iefix') format('embedded-opentype'),
-  url(font-path('stateface-regular-webfont.woff')) format('woff'),
-  url(font-path('stateface-regular-webfont.ttf')) format('truetype'),
-  url(font-path('stateface-regular-webfont.svg#StateFaceRegular')) format('svg');
-  font-weight: normal;
-  font-style: normal;
-}
 @import 'state_font';
 
 body {
@@ -62,17 +52,6 @@ body {
   }
   .navbar-nav {
     margin-left: 8%;
-    // @media (max-width: $screen-sm-max) {
-    //   margin-left: 0;
-    // }
-    // @media (max-width: $screen-xs-max) {
-    //   li {
-    //     a:nth-of-type(1) {
-    //       padding-left: 0;
-    //     }
-    //   }
-    // }
-
     font-size: 22px;
     font-weight: bold;
     letter-spacing: .05em;
@@ -93,10 +72,6 @@ body {
     }
   }
 }
-
-// #main-container {
-//   background-color: #ffffff; //#ecf0f1;
-// }
 
 h1, h2, h3, h4, h5, h6 {
   text-align: center;
@@ -126,10 +101,13 @@ h4.with_counts {
   }
 }
 
-
+@import 'infographic/categories';
+@import 'infographic/costs';
+@import 'infographic/elevation';
+@import 'infographic/monthlies';
 @import 'infographic/states_bar';
 @import 'infographic/states_map';
-@import 'infographic/costs';
+@import 'infographic/towing';
 
 #loading {
   margin-top: 100px;
@@ -138,109 +116,6 @@ h4.with_counts {
     display: inline-block;
     font-family: StateFaceRegular;
   }
-}
-
-// was 41, 128, 185
-$colors_blue: rgba(43, 84, 126,1.0), rgba(43, 84, 126,0.9), rgba(43, 84, 126,0.8), rgba(43, 84, 126,0.7), rgba(43, 84, 126,0.6), rgba(43, 84, 126,0.5), rgba(43, 84, 126,0.4), rgba(43, 84, 126,0.3), rgba(43, 84, 126,0.2), rgba(43, 84, 126,0.1), rgba(43, 84, 126,0.1), rgba(43, 84, 126,0.1), rgba(43, 84, 126,0.1);
-
-#info-category {
-  #info-category_counts {
-    .category-label {
-      font-size: 18px;
-    }
-    .category-label-count {
-      font-size: 48px;
-      font-weight: bold;
-    }
-  }
-
-
-  #category-counts-list {
-    ul {
-      font-weight: bold;
-      margin-top: 15px;
-      li {
-        @for $i from 1 through length($colors_blue) {
-          &:nth-child(#{$i}) {
-            span {
-              background-color: nth($colors_blue, $i);
-            }
-          }
-          &:hover {
-            cursor: default;
-          }
-        }
-        span {
-          width: 35px;
-          display: inline-block;
-          margin-right: 15px;
-          line-height: inherit;
-        }
-        margin: 0;
-        padding: 5px 0;
-      }
-    }
-  }
-}
-div.tooltip { position: absolute; width: 60px; height: 28px; padding: 2px; font: 12px sans-serif; background: lightsteelblue; border: 0px; border-radius: 8px; pointer-events: none; }
-.arc_hover { stroke: #444; stroke-width: 3px; }
-
-
-
-
-
-#info-monthly-cost {
-  .axis path, .axis line {
-    fill: none;
-    stroke: #000;
-    shape-rendering: crispEdges;
-    display: none;
-  }
-
-  .y.axis {
-    //display: none;
-  }
-
-  .x.axis path {
-    display: none;
-  }
-
-  .line {
-    fill: none;
-    stroke: $main-color;
-    stroke-width: 4px;
-  }
-
-  .overlay {
-    fill: none;
-    pointer-events: all;
-  }
-
-  .focus circle {
-    fill: none;
-    stroke: $main-color;
-  }
-
-  .focus-text {
-    fill: $main-color;
-    background-color: #ff0000;
-  }
-
-  .dot {
-    fill: $main-color;
-    stroke: $main-color;
-    stroke-width: 3.5px;
-  }
-
-  .area {
-    fill: rgba(43, 84, 126, 0.2);
-  }
-
-  .avgText {
-    fill: rgba(43, 84, 126, 0.7);
-    font-size: 18px;
-  }
-
 }
 
 
@@ -259,7 +134,7 @@ div.tooltip { position: absolute; width: 60px; height: 28px; padding: 2px; font:
   font-size: 10px;
   width: 100%;
   line-height: 1;
-  color: rgba(0, 0, 0, 0.8);
+  color: $main-color;
   content: "\25BC";
   position: absolute;
   text-align: center;
@@ -271,51 +146,6 @@ div.tooltip { position: absolute; width: 60px; height: 28px; padding: 2px; font:
   top: 100%;
   left: 0;
 }
-
-
-.grid-line {
-  stroke: rgba(43, 84, 126, 0.7);
-  stroke-width: 2px;
-  stroke-dasharray: 4,4;
-}
-
-
-
-#state-bubbles {
-  .circle {
-    fill: $main-color;
-    color: #fff;
-  }
-}
-
-
-.towing {
-  background-image: url('/images/airstream_150h_b.png'); //url('/images/rig_profile_left.png');
-  background-repeat: no-repeat;
-  background-position: left;
-  height: 150px;
-  border-bottom: solid 1px #ccc;
-  position: relative;
-  margin-bottom: 12px;
-
-  .towing_total {
-    position: absolute;
-    top: 23px;
-    left: 75px;
-  }
-}
-
-.elevation_icon {
-  fill: rgba(43, 84, 126, 1);
-  fill-opacity: 1;
-  fill-rule: evenodd;
-  stroke: none;
-}
-
-.elevation-row {
-  margin-top: 24px;
-}
-
 
 #blog {
   margin-top: 20px;

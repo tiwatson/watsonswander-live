@@ -1,3 +1,13 @@
+@font-face {
+  font-family: 'StateFaceRegular';
+  src: url(font-path('stateface-regular-webfont.eot'));
+  src: url(font-path('stateface-regular-webfont.eot') + '?#iefix') format('embedded-opentype'),
+  url(font-path('stateface-regular-webfont.woff')) format('woff'),
+  url(font-path('stateface-regular-webfont.ttf')) format('truetype'),
+  url(font-path('stateface-regular-webfont.svg#StateFaceRegular')) format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
 
 .stateface:before {
     font-family: StateFaceRegular;

@@ -1,0 +1,16 @@
+
+.towing {
+  background-image: url('/images/airstream_150h_b.png'); //url('/images/rig_profile_left.png');
+  background-repeat: no-repeat;
+  background-position: left;
+  height: 150px;
+  border-bottom: solid 1px #ccc;
+  position: relative;
+  margin-bottom: 12px;
+
+  .towing_total {
+    position: absolute;
+    top: 23px;
+    left: 75px;
+  }
+}

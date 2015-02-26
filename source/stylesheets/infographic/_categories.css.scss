@@ -1,0 +1,46 @@
+// was 41, 128, 185
+$colors_blue: rgba(43, 84, 126,1.0), rgba(43, 84, 126,0.9), rgba(43, 84, 126,0.8), rgba(43, 84, 126,0.7), rgba(43, 84, 126,0.6), rgba(43, 84, 126,0.5), rgba(43, 84, 126,0.4), rgba(43, 84, 126,0.3), rgba(43, 84, 126,0.2), rgba(43, 84, 126,0.1), rgba(43, 84, 126,0.1), rgba(43, 84, 126,0.1), rgba(43, 84, 126,0.1);
+
+#info-category {
+  #info-category_counts {
+    .category-label {
+      font-size: 18px;
+    }
+    .category-label-count {
+      font-size: 48px;
+      font-weight: bold;
+    }
+  }
+
+
+  #category-counts-list {
+    ul {
+      font-weight: bold;
+      margin-top: 15px;
+      li {
+        @for $i from 1 through length($colors_blue) {
+          &:nth-child(#{$i}) {
+            span {
+              background-color: nth($colors_blue, $i);
+            }
+          }
+          &:hover {
+            cursor: default;
+          }
+        }
+        span {
+          width: 35px;
+          display: inline-block;
+          margin-right: 15px;
+          line-height: inherit;
+        }
+        margin: 0;
+        padding: 5px 0;
+      }
+    }
+  }
+}
+div.tooltip { position: absolute; width: 60px; height: 28px; padding: 2px; font: 12px sans-serif; background: lightsteelblue; border: 0px; border-radius: 8px; pointer-events: none; }
+.arc_hover { stroke: #444; stroke-width: 3px; }
+
+
