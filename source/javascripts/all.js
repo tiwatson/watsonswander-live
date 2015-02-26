@@ -12,8 +12,6 @@ if (DEVMODE) {
 
 var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 
-var data; // a global
-
 var parseDate = d3.time.format("%d-%m-%Y").parse,
 bisectDate = d3.bisector(function(d) { return d.date; }).left,
 formatValue = d3.format(",.0f"),
@@ -89,9 +87,8 @@ var loadingState = function() {
 var stateInterval = setInterval(loadingState, 100);
 loadingState();
 
-d3.json(apiUrl, function(error, json) {
+d3.json(apiUrl, function(error, data) {
   if (error) return console.warn(error);
-  data = json;
 
   new StateMap(data);
   new Categories(data);
