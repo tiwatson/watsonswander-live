@@ -13,7 +13,7 @@ $brand-info: #d35400 !default;
 $grid-float-breakpoint: 0;
 
 $main-color: rgba(43, 84, 126, 1); // #2B547E; // steelblue
-
+$link-color: $main-color;
 $navbar-default-color:             #eee !default;
 $navbar-default-bg:                #9A1D23 !default;
 $navbar-default-border:            darken($navbar-default-bg, 6.5%) !default;
@@ -130,10 +130,6 @@ h4.with_counts {
 @import 'infographic/states_bar';
 @import 'infographic/states_map';
 @import 'infographic/costs';
-
-footer {
-  margin-bottom: 300px;
-}
 
 #loading {
   margin-top: 100px;
@@ -318,4 +314,26 @@ div.tooltip { position: absolute; width: 60px; height: 28px; padding: 2px; font:
 
 .elevation-row {
   margin-top: 24px;
+}
+
+
+#blog {
+  margin-top: 20px;
+  .row {
+    margin-top: 20px;
+  }
+  .form-control {
+    width: 200px;
+  }
+  .facebook {
+    margin-top: 2px;
+  }
+}
+
+footer {
+  margin-top: 50px;
+  border-top: solid 1px #ccc;
+  padding-top: 12px;
+  text-align: center;
+  margin-bottom: 50px;
 }

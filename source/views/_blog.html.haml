@@ -1,0 +1,36 @@
+#blog
+
+  %h2.info-title Watsons Wander Blog
+
+  .row
+    .col-xs-4
+      %a{ href: 'http://www.watsonswander.com/2013/one-year-on-the-road/' }
+        %img.img-rounded{src: '/images/blog-1.jpg'}
+      %h4
+        %a{ href: 'http://www.watsonswander.com/2013/one-year-on-the-road/' }Year 1 in review
+    .col-xs-4
+      %a{ href: 'http://www.watsonswander.com/2014/two-years-road/'}
+        %img.img-rounded{src: '/images/blog-2.jpg'}
+      %h4
+        %a{ href: 'http://www.watsonswander.com/2014/two-years-road/'}Year 2 in review
+    .col-xs-4
+      %a{ href: 'http://www.watsonswander.com/2014/las-cienegas-empire-ranch/' }
+        %img.img-rounded{src: '/images/blog-3.jpg'}
+      %h4
+        %a{ href: 'http://www.watsonswander.com/2014/las-cienegas-empire-ranch/' }March 2014
+  .row
+    .col-xs-6
+      %form.form-inline{ action: "//watsonswander.us10.list-manage.com/subscribe/post?u=d9e3adfde9131b31cdd253378&amp;id=136c247184", method: "post", target: "_blank" }
+        .form-group
+          %label.sr-only{ for: 'mce-Email'}
+            Email Address
+          %input.form-control#mce-EMAIL{ type: "text", name: 'EMAIL', placeholder: 'Email Address' }
+        %button.btn.btn-primary Subscribe by email
+        %div{ style: "position: absolute; left: -5000px;" }
+          %input{ type: "text", name: "b_d9e3adfde9131b31cdd253378_136c247184", tabindex: "-1", value: "" }
+    .col-xs-6.facebook
+      %h3
+        %a{ href: 'https://facebook.com/WatsonsWander'}
+          %img{ src: '/images/fb_logo.png' }
+        %a{ href: 'https://facebook.com/WatsonsWander'}
+          Follow us on facebook.

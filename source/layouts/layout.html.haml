@@ -1,0 +1,53 @@
+!!!
+%html
+  %head
+    %meta{:charset => "utf-8"}
+      %meta{:content => "IE=edge,chrome=1", "http-equiv" => "X-UA-Compatible"}
+        %title Watsons Wander Live
+        = stylesheet_link_tag "normalize", "all"
+  %body
+    %header.banner.navbar.navbar-default.navbar-static-top{:role => "banner"}
+      .container
+        .navbar-header
+          %a.navbar-brand{:href => "http://www.watsonswander.com/"} WatsonsWander
+        %nav{:role => "navigation"}
+          %ul#menu-primary-navigation.nav.navbar-nav
+            %li.menu-who
+              %a{:href => "http://www.watsonswander.com/who/"} Who
+            %li.menu-what
+              %a{:href => "http://www.watsonswander.com/what/"} What
+            %li.menu-where
+              %a{:href => "http://www.watsonswander.com/where/"} Where
+            %li.menu-why
+              %a{:href => "http://www.watsonswander.com/why/"} Why
+    .container
+      .row
+        .col-xs-2
+          %img.img-rounded{src: '/images/us.jpg', style: "width: 95px;"}
+        .col-xs-10
+          %p.lead
+            Since June 2012 we have traveled the U.S. while living and working from our 25-foot Airstream. This is the data from all the places we have stayed.
+
+
+    .container
+      = yield
+
+    %footer.container
+      .row
+        .col-xs-12
+          %p
+            %a{ href: '/'}Watsons Wander Live
+            is a creation of
+            %a{ href: 'http://wanderinglabs.com' }WanderingLabs
+            and
+            %a{ href: 'http://tiwatson.com' }Tim Watson
+            %br/
+            Find the source on
+            %a{ href: 'https://github.com/tiwatson/watsonswander-live' }GitHub
+            %br/
+            Contact me at:
+            tiwatson@gmail.com
+
+
+
+  = javascript_include_tag  "all"
