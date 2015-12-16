@@ -1,3 +1,5 @@
+//var moment = require('moment');
+
 var StateMap = (function() {
 
 
@@ -149,6 +151,18 @@ function StateMap(data) {
   var stayLengthMin = 1; // d3.min(data.map_places.map( function(d) { return d.stay_length; }));
   var stayLengthMax = d3.max(data.map_places.map( function(d) { return d.stay_length; }));
   var stayLengthScale = d3.scale.linear().domain([stayLengthMin,stayLengthMax]).range([4,25]);
+  var pointYear = function(dateStay) {
+    var momentStay = moment(dateStay, 'YYYY-MM-DD');
+    if (momentStay.isAfter('2015-06-14')) {
+      return 'point point4';
+    } else if (momentStay.isAfter('2014-06-14')) {
+      return 'point point3';
+    } else if (momentStay.isAfter('2013-06-14')) {
+      return 'point point2';
+    } else {
+      return 'point point1';
+    }
+  };
 
   map_places = [];
   data.map_places.forEach( function(place) {
@@ -157,7 +171,8 @@ function StateMap(data) {
       properties: {
         title: place.title,
         city_state: place.city + ", " + place.state_short,
-        stay_length: place.stay_length
+        stay_length: place.stay_length,
+        arrived: place.arrived,
       },
       geometry: {
         type: "Point",
@@ -174,7 +189,7 @@ function StateMap(data) {
     .enter().append("circle")
     .attr("d", path)
     .attr("stroke", "black")
-    .attr('class', 'point')
+    .attr('class', function(d, i) { return pointYear(d.properties.arrived); })
     .attr("cx", function(d, i) { return projection(d.geometry.coordinates)[0]; })
     .attr("cy", function(d, i) { return projection(d.geometry.coordinates)[1]; })
     .attr("r", function(d, i) { return stayLengthScale(d.properties.stay_length); })
