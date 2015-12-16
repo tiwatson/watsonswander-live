@@ -16,6 +16,7 @@ var StateBar = (function(){
 
     d3.select('.current_length_count').text(data.current_state_stay);
     d3.select('#current_state_text').text( us_states[data.location_current.state_short] );
+    d3.select('.current_state').text(state_face[data.location_current.state_short]);
 
     var x = d3.scale.linear()
     .domain([0, d3.max(data.states, function(d) { return d.days; })])

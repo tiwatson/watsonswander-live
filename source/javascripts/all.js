@@ -2,13 +2,13 @@
 
 var apiUrl = '/data.json';
 
-// Uglifier will remove
-if (typeof DEVMODE === "undefined") {
-    DEVMODE = true;
-}
-if (DEVMODE) {
-  apiUrl = 'http://wl-api-maps.dev/api/v1/maps/1/infographic.json'
-}
+// // Uglifier will remove
+// if (typeof DEVMODE === "undefined") {
+//     DEVMODE = true;
+// }
+// if (DEVMODE) {
+//   apiUrl = 'http://wl-api-maps.dev/api/v1/maps/1/infographic.json'
+// }
 
 var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 
